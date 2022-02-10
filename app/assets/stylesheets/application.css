@@ -21,3 +21,7 @@
  .navbar {
    background-color:darkgray;
  }
+
+ table, th, td {
+   border: 1px solid black;
+ }

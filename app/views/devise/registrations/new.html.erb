@@ -3,6 +3,22 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+  <!--
+  <label for="type">I am a:</label>
+  <select name="type" id="type">
+    <option value="Manager">Manager</option>
+    <option value="Developer">Developer</option>
+    <option value="QualityAssurance">QualityAssurance</option>
+  </select>
+  -->
+
+  <%= radio_button(:user, :type, 'Manager') %>
+  <%= f.label 'Manager'%>
+  <%= radio_button(:user, :type, 'Developer') %>
+  <%= f.label 'Developer'%>
+  <%= radio_button(:user, :type, 'QualityAssurance') %>
+  <%= f.label 'QualityAssurance'%>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

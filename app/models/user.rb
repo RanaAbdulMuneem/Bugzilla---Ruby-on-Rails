@@ -5,4 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :projects
+
+  # enum type: {
+  #   Manager: 1,
+  #   Developer: 2,
+  #   QualityAssurance: 3
+  # }
 end

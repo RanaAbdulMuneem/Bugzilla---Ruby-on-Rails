@@ -1,5 +1,5 @@
 <div class="navbar">
-  <p class="navbar">BUGZILLA</p>
+  <p class="navbar"><%= link_to 'BUGZILLA', root_path %></p>
   <ul class="navbar">
     <% if user_signed_in? %>
       <li class="navbar"><%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete %></li>

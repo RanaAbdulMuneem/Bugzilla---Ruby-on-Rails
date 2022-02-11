@@ -1,5 +1,6 @@
 <% if user_signed_in?%>
   <h1>Welcome <%= current_user.email %></h1>
+  <h3>Signed in as <%= current_user.type %></h3>
 <% else %>
   <h1>Welcome to Bugzilla</h1>
 <% end %>

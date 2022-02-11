@@ -8,7 +8,7 @@
 User.destroy_all
 Project.destroy_all
 
-user = User.create(email: 'a@abc.com', password: 'aaaaaa')
+user = User.create(email: 'a@abc.com', password: 'aaaaaa', type: 1)
 3.times do |p|
   user.projects.create(title: "Project ##{p}")
 end

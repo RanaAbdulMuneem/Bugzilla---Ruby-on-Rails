@@ -1,0 +1,2 @@
+class QualityAssurance < User
+end

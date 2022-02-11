@@ -1,9 +1,40 @@
-<p id="notice"><%= notice %></p>
+<%= render 'layouts/project', type: current_user.type%>
 
-<p>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</p>
 
-<%= link_to 'Edit', edit_manager_project_path(@project) %> |
-<%= link_to 'Back', manager_projects_path %>
+
+<h1>Developers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Links</th>
+    </tr>
+    <% @developers.each do |dev| %>
+      <tr>
+        <td><%= "#{dev.first_name} #{dev.last_name}" %></td>
+        <td><%= dev.email %></td>
+        <td>Remove</td>
+      </tr>
+    <% end %>
+  </thead>
+</table>
+
+<h1>Quality Assurers</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Links</th>
+    </tr>
+    <% @qas.each do |qa| %>
+      <tr>
+        <td><%= "#{qa.first_name} #{qa.last_name}" %></td>
+        <td><%= qa.email %></td>
+        <td>Remove</td>
+      </tr>
+    <% end %>
+  </thead>
+</table>

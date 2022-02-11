@@ -1,26 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Projects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3">Links</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.title %></td>
-        <td><%= link_to 'Show', manager_project_path(project) %></td>
-        <td><%= link_to 'Edit', edit_manager_project_path(project) %></td>
-        <td><%= link_to 'Destroy', manager_project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'layouts/project_list', type: current_user.type %>
 
 <br>
 

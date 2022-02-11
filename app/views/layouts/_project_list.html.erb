@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th colspan="3">Links</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.title %></td>
+
+        <% if type == 'Manager' %>
+          <td><%= link_to 'Show', manager_project_path(project) %></td>
+          <td><%= link_to 'Edit', edit_manager_project_path(project) %></td>
+          <td><%= link_to 'Destroy', manager_project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% elsif type == 'Developer' %>
+          <td><%= link_to 'Show', developer_project_path(project) %></td>
+        <% elsif type == 'QualityAssurance' %>
+          <td><%= link_to 'Show', quality_assurance_project_path(project) %></td>
+        <% end %>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>

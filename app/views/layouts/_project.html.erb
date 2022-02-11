@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <strong>Title:</strong>
+  <%= @project.title %>
+</h1>
+
+<% if type == 'Manager' %>
+
+  <%= link_to 'Edit', edit_manager_project_path(@project) %> |
+  <%= link_to 'Back', manager_projects_path %>
+
+<% elsif type == 'Developer' %>
+
+  <%= link_to 'Back', developer_projects_path %>
+
+<% elsif type == 'QualityAssurance' %>
+
+  <%= link_to 'Back', quality_assurance_projects_path %>
+
+<% end %>

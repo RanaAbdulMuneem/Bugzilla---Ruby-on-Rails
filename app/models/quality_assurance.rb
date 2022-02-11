@@ -1,3 +1,4 @@
 class QualityAssurance < User
-  has_and_belongs_to_many :projects, foreign_key: :user_id
+  has_many :reports_tos, foreign_key: :user_id
+  has_many :projects, through: :reports_tos
 end

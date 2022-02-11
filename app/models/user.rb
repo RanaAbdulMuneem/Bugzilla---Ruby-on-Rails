@@ -4,8 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :projects
-
   # enum type: {
   #   Manager: 1,
   #   Developer: 2,

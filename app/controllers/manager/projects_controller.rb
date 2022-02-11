@@ -1,5 +1,5 @@
 class Manager::ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[ show edit update destroy add_developer remove_developer]
   before_action :authenticate_user!
 
   def index
@@ -51,6 +51,18 @@ class Manager::ProjectsController < ApplicationController
       format.html { redirect_to manager_projects_path, notice: "Project was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def add_developer
+    developer = Developer.find(params.require(:developer).permit(:user_id)[:user_id])
+    @project.developers << developer unless @project.developers.include? developer
+    redirect_to manager_project_path(@project)
+  end
+
+  def remove_developer
+    developer = Developer.find(params[:user_id])
+    @project.developers.delete(developer)
+    redirect_to manager_project_path(@project)
   end
 
   private

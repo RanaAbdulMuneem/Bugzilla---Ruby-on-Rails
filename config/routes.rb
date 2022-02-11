@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   namespace :manager do
-    resources :projects
+    resources :projects do
+      member do
+        post 'developer', to: 'projects#add_developer', as: :developers
+        delete 'developer/:user_id/', to: 'projects#remove_developer', as: :developer
+      end
+    end
   end
   namespace :developer do
     resources :projects, only: %i[index show]

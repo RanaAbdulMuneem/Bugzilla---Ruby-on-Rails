@@ -1,0 +1,2 @@
+module QualityAssurance::ProjectsHelper
+end

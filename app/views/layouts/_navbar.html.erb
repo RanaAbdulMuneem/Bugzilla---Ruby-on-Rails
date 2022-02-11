@@ -4,7 +4,15 @@
     <% if user_signed_in? %>
       <li class="navbar"><%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete %></li>
       <li class="navbar"><%= link_to 'EDIT PROFILE', edit_user_registration_path %>
-      <li class="navbar"><%= link_to 'PROJECTS', projects_path %></li>
+
+      <% if current_user.Manager? %>
+        <li class="navbar"><%= link_to 'PROJECTS', manager_projects_path %></li>
+      <% elsif current_user.Developer? %>
+        <li class="navbar"><%= link_to 'PROJECTS', developer_projects_path %></li>
+      <% elsif current_user.QualityAssurance? %>
+        <li class="navbar"><%= link_to 'PROJECTS', quality_assurance_projects_path %></li>
+      <% end %>
+
     <% else %>
       <li class="navbar"><%= link_to 'SIGN IN', new_user_session_path %></li>
       <li class="navbar"><%= link_to 'SIGNUP', new_user_registration_path %></li>

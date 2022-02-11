@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_10_175352) do
+ActiveRecord::Schema.define(version: 2022_02_11_092654) do
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
@@ -20,8 +20,14 @@ ActiveRecord::Schema.define(version: 2022_02_10_175352) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
+  create_table "projects_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "project_id", null: false
+    t.index ["user_id", "project_id"], name: "index_projects_users_on_user_id_and_project_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "type"
+    t.integer "type"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

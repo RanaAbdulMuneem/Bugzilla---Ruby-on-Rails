@@ -26,6 +26,12 @@
 </table>
 
 <h1>Quality Assurers</h1>
+
+<%= form_with url: qas_manager_project_path(@project), local: true do |form| %>
+  <%= collection_select(:qa, :user_id, QualityAssurance.all, :id, :email) %>
+  <%= form.submit 'Add Quality Assurer'%>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -37,7 +43,7 @@
       <tr>
         <td><%= "#{qa.first_name} #{qa.last_name}" %></td>
         <td><%= qa.email %></td>
-        <td>Remove</td>
+        <td><%= link_to 'Remove', qa_manager_project_path(@project, qa), method: :delete%></td>
       </tr>
     <% end %>
   </thead>

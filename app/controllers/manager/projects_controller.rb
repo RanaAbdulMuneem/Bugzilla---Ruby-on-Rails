@@ -1,5 +1,5 @@
 class Manager::ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy add_developer remove_developer]
+  before_action :set_project, only: %i[ show edit update destroy add_developer remove_developer add_qa remove_qa]
   before_action :authenticate_user!
 
   def index
@@ -62,6 +62,18 @@ class Manager::ProjectsController < ApplicationController
   def remove_developer
     developer = Developer.find(params[:user_id])
     @project.developers.delete(developer)
+    redirect_to manager_project_path(@project)
+  end
+
+  def add_qa
+    qa = QualityAssurance.find(params.require(:qa).permit(:user_id)[:user_id])
+    @project.quality_assurances << qa unless @project.quality_assurances.include? qa
+    redirect_to manager_project_path(@project)
+  end
+
+  def remove_qa
+    qa = QualityAssurance.find(params[:user_id])
+    @project.quality_assurances.delete(qa)
     redirect_to manager_project_path(@project)
   end
 

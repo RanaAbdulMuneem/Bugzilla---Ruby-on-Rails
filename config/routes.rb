@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       member do
         post 'developer', to: 'projects#add_developer', as: :developers
         delete 'developer/:user_id/', to: 'projects#remove_developer', as: :developer
+
+        post 'qa', to: 'projects#add_qa', as: :qas
+        delete 'qa/:user_id/', to: 'projects#remove_qa', as: :qa
       end
     end
   end

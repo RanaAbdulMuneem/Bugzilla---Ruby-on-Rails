@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   namespace :manager do
     resources :projects do
       member do
@@ -15,7 +14,9 @@ Rails.application.routes.draw do
     resources :projects, only: %i[index show]
   end
   namespace :quality_assurance do
-    resources :projects, only: %i[index show]
+    resources :projects, only: %i[index show] do
+      resources :change_requests, shallow: true, only: %i[index show new create]
+    end
   end
   devise_for :users
   get 'home/index'

@@ -1,0 +1,2 @@
+module QualityAssurance::ChangeRequestsHelper
+end

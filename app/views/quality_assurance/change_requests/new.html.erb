@@ -1,0 +1,52 @@
+<h1>New Change Request</h1>
+<%= form_with(model: @change_request, url: quality_assurance_project_change_requests_path(@project), local: true) do |form| %>
+  <% if @change_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@change_request.errors.count, "error") %> prohibited this change request from being saved:</h2>
+
+      <ul>
+      <% @change_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_field :deadline %>
+  </div>
+  <div class="field">
+    <%= form.label :screen_shot %>
+    <%= form.text_field :screen_shot %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.select :type, options_for_select([['Bug', 'Bug'],['Feature', 'Feature']]) %>
+  </div>
+
+  <div class="field" style="display:none;">
+    <%= form.label :status %>
+    <%= form.text_field :status, value: 'new'%>
+  </div>
+
+  <div class="field" style="display:none;">
+    <%= form.label :project_id %>
+    <%= form.text_field :project_id, value: @project.id%>
+  </div>
+  <div class="field" style="display:none;">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, value: current_user.id%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+

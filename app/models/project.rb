@@ -5,4 +5,6 @@ class Project < ApplicationRecord
 
   has_many :reports_tos
   has_many :quality_assurances, through: :reports_tos
+
+  has_many :change_requests
 end

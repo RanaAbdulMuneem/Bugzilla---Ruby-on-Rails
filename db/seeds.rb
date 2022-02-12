@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts 'Running seed file...'
 WorksOn.destroy_all
 ReportsTo.destroy_all
 Project.destroy_all
@@ -19,7 +20,6 @@ qa2 = QualityAssurance.create(email: 'qa2@mail.com', password: '123456', first_n
 projects = []
 3.times do |p|
   projects[p] = manager.projects.create(title: "Project ##{p}")
-  puts projects[p]
 end
 
 developer1.projects << projects[0]
@@ -31,3 +31,5 @@ developer2.projects << projects[1]
 developer2.projects << projects[2]
 qa2.projects << projects[1]
 qa2.projects << projects[2]
+
+puts 'Seeded!'

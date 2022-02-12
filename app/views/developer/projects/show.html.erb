@@ -21,7 +21,7 @@
       <% if change.status == 'resolved' || change.status == 'completed'%>
         <td>Resolved</td>
       <% else %>
-        <td>Mark as resolved</td>
+        <td><%=link_to 'Mark as resolved', developer_change_request_path(change), method: :patch, data: {confirm: 'Are you sure?'} %></td>
       <% end %>
     </tr>
     <% end %>

@@ -5,6 +5,7 @@ class Developer::ProjectsController < ApplicationController
   end
 
   def show
+    @assigned_requests = current_user.change_requests
     @change_requests = @project.change_requests
   end
 

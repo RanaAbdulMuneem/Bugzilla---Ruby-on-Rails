@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   end
   namespace :developer do
     resources :projects, only: %i[index show] do
-      resources :change_requests, shallow: true, only: %i[show]
+      resources :change_requests, shallow: true, only: %i[show edit update] do
+        member do
+          post 'assign', to: 'change_requests#assign'
+        end
+      end
     end
   end
   namespace :quality_assurance do

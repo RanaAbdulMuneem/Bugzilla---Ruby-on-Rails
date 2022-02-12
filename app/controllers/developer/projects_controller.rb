@@ -5,6 +5,7 @@ class Developer::ProjectsController < ApplicationController
   end
 
   def show
+    @change_requests = @project.change_requests
   end
 
   private

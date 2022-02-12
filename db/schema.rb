@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2022_02_12_130828) do
     t.date "deadline"
     t.string "screen_shot"
     t.integer "type"
-    t.string "status"
+    t.string "status", default: "new"
     t.integer "project_id"
     t.integer "user_id"
     t.datetime "created_at", null: false

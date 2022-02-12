@@ -11,7 +11,9 @@ Rails.application.routes.draw do
     end
   end
   namespace :developer do
-    resources :projects, only: %i[index show]
+    resources :projects, only: %i[index show] do
+      resources :change_requests, shallow: true, only: %i[show]
+    end
   end
   namespace :quality_assurance do
     resources :projects, only: %i[index show] do

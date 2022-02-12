@@ -5,7 +5,7 @@ class CreateChangeRequests < ActiveRecord::Migration[5.2]
       t.date :deadline
       t.string :screen_shot
       t.integer :type
-      t.string :status
+      t.string :status, default: 'new'
       t.references :project, foreign_key: true
       t.references :user, foreign_key: true
 

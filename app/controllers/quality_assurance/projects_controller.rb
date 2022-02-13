@@ -5,7 +5,7 @@ class QualityAssurance::ProjectsController < ApplicationController
   end
 
   def show
-    @change_requests = @project.change_requests.where(user_id: current_user.id)
+    @change_requests = @project.change_requests
   end
 
   private

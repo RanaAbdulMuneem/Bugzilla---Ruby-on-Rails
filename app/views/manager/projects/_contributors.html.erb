@@ -1,19 +1,21 @@
 <% if contributors.count > 0 %>
-  <table>
-    <thead>
+  <table class="table table-dark table-striped table-hover">
+    <thead class="thead-dark">
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Links</th>
+        <th class="col-md-1">Actions</th>
       </tr>
       <% contributors.each do |contributor| %>
         <tr>
           <td><%= "#{contributor.first_name} #{contributor.last_name}" %></td>
           <td><%= contributor.email %></td>
           <% if type == 'Developer' %>
-            <td><%= link_to 'Remove', developer_manager_project_path(@project, contributor), method: :delete%></td>
+            <td class="text-right"><%= link_to 'Remove', developer_manager_project_path(@project, contributor),
+            method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
           <% elsif type == 'QualityAssurance' %>
-            <td><%= link_to 'Remove', qa_manager_project_path(@project, contributor), method: :delete%></td>
+            <td><%= link_to 'Remove', qa_manager_project_path(@project, contributor),
+              method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
           <% end %>
         </tr>
       <% end %>

@@ -1,17 +1,27 @@
 <%= render 'layouts/project', type: current_user.type%>
-
 <%= render 'layouts/change_requests', change_requests: @change_requests%>
+<hr>
 
-<h1>Developers</h1>
-<%= form_with url: developers_manager_project_path(@project), local: true do |form| %>
-  <%= collection_select(:developer, :user_id, Developer.all, :id, :email) %>
-  <%= form.submit 'Add Developer'%>
-<% end %>
-<%= render 'contributors', contributors: @developers, type: 'Developer' %>
-
-<h1>Quality Assurers</h1>
-<%= form_with url: qas_manager_project_path(@project), local: true do |form| %>
-  <%= collection_select(:qa, :user_id, QualityAssurance.all, :id, :email) %>
-  <%= form.submit 'Add Quality Assurer'%>
-<% end %>
-<%= render 'contributors', contributors: @qas, type: 'QualityAssurance' %>
+<div class="container bg-dark rounded text-white pb-2 mb-1">
+  <h1>Developers</h1>
+  <%= form_with url: developers_manager_project_path(@project), local: true do |form| %>
+    <div class="field form-group">
+      <%= form.label 'Developers: ' %>
+      <%= collection_select(:developer, :user_id, Developer.all, :id, :email, {class: 'dropdown-menu'}) %>
+      <%= form.submit 'Add Developer', class: "btn btn-success py-0" %>
+    </div>
+  <% end %>
+  <%= render 'contributors', contributors: @developers, type: 'Developer' %>
+</div>
+<hr>
+<div class="container bg-dark rounded text-white pb-2 mb-1">
+  <h1>Quality Assurers</h1>
+  <%= form_with url: qas_manager_project_path(@project), local: true do |form| %>
+    <div class="field form-group">
+      <%= form.label 'Quality Assurers: ' %>
+      <%= collection_select(:qa, :user_id, QualityAssurance.all, :id, :email) %>
+      <%= form.submit 'Add Quality Assurer', class: "btn btn-success py-0" %>
+    </div>
+  <% end %>
+  <%= render 'contributors', contributors: @qas, type: 'QualityAssurance' %>
+</div>

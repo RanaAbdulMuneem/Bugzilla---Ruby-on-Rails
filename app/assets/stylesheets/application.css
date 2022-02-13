@@ -14,14 +14,6 @@
  *= require_self
  */
 
- ul.navbar, li.navbar, p.navbar {
-   display: inline;
- }
-
- .navbar {
-   background-color:darkgray;
- }
-
- table, th, td {
-   border: 1px solid black;
+ body {
+  background-color: #4D7C8A;
  }

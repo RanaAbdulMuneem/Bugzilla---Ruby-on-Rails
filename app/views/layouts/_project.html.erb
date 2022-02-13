@@ -1,21 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<h1>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</h1>
+<div class="container bg-dark rounded text-white pb-2 mb-1">
+  <h1 class="display-4"><%= @project.title %></h1>
+</div>
 
-<% if type == 'Manager' %>
+  <% if type == 'Manager' %>
 
-  <%= link_to 'Edit', edit_manager_project_path(@project) %> |
-  <%= link_to 'Back', manager_projects_path %>
+    <div class="d-flex">
+      <div class="mr-auto p-2"><%= link_to 'Back', manager_projects_path, class: 'btn btn-secondary' %></div>
+      <div class="p-2"><%= link_to 'Edit', edit_manager_project_path(@project), class: 'btn btn-info' %></div>
+      <div class="p-2"><%= link_to 'Destroy', manager_project_path(@project),
+      method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></div>
+    </div>
 
-<% elsif type == 'Developer' %>
+  <% elsif type == 'Developer' %>
+    <div class="d-flex">
+      <div class="mr-auto p-2"><%= link_to 'Back', developer_projects_path, class: 'btn btn-secondary' %></div>
+    </div>
 
-  <%= link_to 'Back', developer_projects_path %>
+  <% elsif type == 'QualityAssurance' %>
+    <div class="d-flex">
+      <div class="mr-auto p-2"><%= link_to 'Back', quality_assurance_projects_path, class: 'btn btn-secondary' %></div>
+    </div>
 
-<% elsif type == 'QualityAssurance' %>
 
-  <%= link_to 'Back', quality_assurance_projects_path %>
-
-<% end %>
+  <% end %>
+<hr>

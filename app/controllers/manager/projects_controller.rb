@@ -27,6 +27,7 @@ class Manager::ProjectsController < ApplicationController
   def show
     @developers = @project.developers
     @qas = @project.quality_assurances
+    @change_requests = @project.change_requests
   end
 
   def edit

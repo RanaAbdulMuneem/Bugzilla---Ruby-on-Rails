@@ -1,0 +1,25 @@
+<h1><%= Project.find(change_request.project_id).title %> / <%= change_request.title %> ( <%= change_request.status %> )</h1>
+
+<%= image_tag change_request.screen_shot, size: "512x256" if change_request.screen_shot.attached?%><br>
+<strong>Type: </strong><%= change_request.type%><br>
+<strong>Status: </strong><%= change_request.status%><br>
+<strong>Deadline: </strong><%= change_request.deadline%><br>
+<strong>Posted by: </strong><%= QualityAssurance.find(change_request.user_id).email %><br>
+
+<h1>Assigned Developers</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% change_request.developers.each do |dev| %>
+      <tr>
+        <td><%= dev.first_name %> <%= dev.last_name %></td>
+        <td><%= dev.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

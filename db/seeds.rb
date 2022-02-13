@@ -34,7 +34,7 @@ developer2.projects << projects[2]
 qa2.projects << projects[1]
 qa2.projects << projects[2]
 puts 'Creating change requests'
-projects[0].change_requests.create(title: 'login issue', deadline: '2022-10-2', screen_shot: 'N/A', type: 'Bug', user_id: qa1.id)
-projects[0].change_requests.create(title: 'remember me', deadline: '2022-10-2', screen_shot: 'N/A', type: 'Feature', user_id: qa1.id)
+projects[0].change_requests.create(title: 'login issue', deadline: '2022-10-2', type: 'Bug', user_id: qa1.id)
+projects[0].change_requests.create(title: 'remember me', deadline: '2022-10-2', type: 'Feature', user_id: qa1.id)
 
 puts 'Seeded!'

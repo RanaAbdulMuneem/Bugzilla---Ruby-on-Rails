@@ -9,6 +9,7 @@
       <th>Deadline</th>
       <th>Type</th>
       <th>Status</th>
+      <th>Posted by</th>
       <th colspan=3>Links</th>
     </tr>
   </thead>
@@ -18,7 +19,8 @@
       <td><%= change.deadline %></td>
       <td><%= change.type %></td>
       <td><%= change.status %></td>
-      <td>show</td>
+      <td><%= QualityAssurance.find(change.user_id).email %></td>
+      <td><%= link_to 'Show', quality_assurance_change_request_path(change) %></td>
     </tr>
   <% end %>
 </table>

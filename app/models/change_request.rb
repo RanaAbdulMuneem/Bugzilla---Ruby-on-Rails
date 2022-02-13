@@ -5,6 +5,8 @@ class ChangeRequest < ApplicationRecord
   has_many :assignments
   has_many :developers, through: :assignments
 
+  has_one_attached :screen_shot, dependent: :destroy
+
   enum type: {
     Bug: 1,
     Feature: 2

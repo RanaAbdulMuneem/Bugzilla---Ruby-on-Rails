@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :manager do
+    get 'change_requests/show'
+  end
+  namespace :manager do
     resources :projects do
       member do
         post 'developer', to: 'projects#add_developer', as: :developers
@@ -8,6 +11,7 @@ Rails.application.routes.draw do
         post 'qa', to: 'projects#add_qa', as: :qas
         delete 'qa/:user_id/', to: 'projects#remove_qa', as: :qa
       end
+      resources :change_requests, shallow: true, only: %i[show]
     end
   end
   namespace :developer do

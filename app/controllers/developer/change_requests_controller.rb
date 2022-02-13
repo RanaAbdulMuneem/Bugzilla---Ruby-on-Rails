@@ -2,26 +2,27 @@ class Developer::ChangeRequestsController < ApplicationController
   before_action :set_change_request, only: %i[show assign update]
 
   def show
+    #render plain: @change_request.title
   end
 
   def assign
     dev = Developer.find(current_user.id)
-    @change.developers << dev unless @change.developers.include? dev
-    @change.update(status: 'started')
-    redirect_to developer_project_path(@change.project)
+    @change_request.developers << dev unless @change_request.developers.include? dev
+    @change_request.update(status: 'started')
+    redirect_to developer_project_path(@change_request.project)
   end
 
   def update
-    if (@change.type == 'Bug')
-      @change.update(status: 'resolved')
+    if (@change_request.type == 'Bug')
+      @change_request.update(status: 'resolved')
     else
-      @change.update(status: 'completed')
+      @change_request.update(status: 'completed')
     end
-    redirect_to developer_project_path(@change.project)
+    redirect_to developer_project_path(@change_request.project)
   end
 
   private
     def set_change_request
-      @change = ChangeRequest.find(params[:id])
+      @change_request = ChangeRequest.find(params[:id])
     end
 end

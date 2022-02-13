@@ -1,5 +1,6 @@
 class QualityAssurance::ChangeRequestsController < ApplicationController
   before_action :set_project, only: %i[new create]
+  before_action :set_change_request, only: %i[show]
 
   def show
   end
@@ -11,8 +12,6 @@ class QualityAssurance::ChangeRequestsController < ApplicationController
   def create
     @change_request = ChangeRequest.new(request_params)
     @change_request.save
-    #redirect_to quality_assurance_project_path(@project)
-
 
     respond_to do |format|
       if @change_request.save
@@ -28,6 +27,9 @@ class QualityAssurance::ChangeRequestsController < ApplicationController
   private
   def set_project
     @project = Project.find(params[:project_id])
+  end
+  def set_change_request
+    @change_request = ChangeRequest.find(params[:id])
   end
   def request_params
     params.require(:change_request).permit(:title, :deadline, :screen_shot, :type, :status, :user_id, :project_id)

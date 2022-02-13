@@ -1,0 +1,26 @@
+<% if contributors.count > 0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Links</th>
+      </tr>
+      <% contributors.each do |contributor| %>
+        <tr>
+          <td><%= "#{contributor.first_name} #{contributor.last_name}" %></td>
+          <td><%= contributor.email %></td>
+          <% if type == 'Developer' %>
+            <td><%= link_to 'Remove', developer_manager_project_path(@project, contributor), method: :delete%></td>
+          <% elsif type == 'QualityAssurance' %>
+            <td><%= link_to 'Remove', qa_manager_project_path(@project, contributor), method: :delete%></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </thead>
+  </table>
+<% elsif type == 'Developer' %>
+  <h3>No Current Developers</h3>
+<% elsif type == 'QualityAssurance' %>
+  <h3>No Current Quality Assurers</h3>
+<% end %>

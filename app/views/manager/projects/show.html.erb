@@ -7,44 +7,11 @@
   <%= collection_select(:developer, :user_id, Developer.all, :id, :email) %>
   <%= form.submit 'Add Developer'%>
 <% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Links</th>
-    </tr>
-    <% @developers.each do |dev| %>
-      <tr>
-        <td><%= "#{dev.first_name} #{dev.last_name}" %></td>
-        <td><%= dev.email %></td>
-        <td><%= link_to 'Remove', developer_manager_project_path(@project, dev), method: :delete%></td>
-      </tr>
-    <% end %>
-  </thead>
-</table>
+<%= render 'contributors', contributors: @developers, type: 'Developer' %>
 
 <h1>Quality Assurers</h1>
-
 <%= form_with url: qas_manager_project_path(@project), local: true do |form| %>
   <%= collection_select(:qa, :user_id, QualityAssurance.all, :id, :email) %>
   <%= form.submit 'Add Quality Assurer'%>
 <% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Links</th>
-    </tr>
-    <% @qas.each do |qa| %>
-      <tr>
-        <td><%= "#{qa.first_name} #{qa.last_name}" %></td>
-        <td><%= qa.email %></td>
-        <td><%= link_to 'Remove', qa_manager_project_path(@project, qa), method: :delete%></td>
-      </tr>
-    <% end %>
-  </thead>
-</table>
+<%= render 'contributors', contributors: @qas, type: 'QualityAssurance' %>

@@ -7,19 +7,23 @@
 <strong>Posted by: </strong><%= QualityAssurance.find(change_request.user_id).email %><br>
 
 <h1>Assigned Developers</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Mail</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% change_request.developers.each do |dev| %>
+<% if change_request.developers.count > 0%>
+  <table>
+    <thead>
       <tr>
-        <td><%= dev.first_name %> <%= dev.last_name %></td>
-        <td><%= dev.email %></td>
+        <th>Name</th>
+        <th>Mail</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% change_request.developers.each do |dev| %>
+        <tr>
+          <td><%= dev.first_name %> <%= dev.last_name %></td>
+          <td><%= dev.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>No Assigned Developers</h3>
+<% end %>

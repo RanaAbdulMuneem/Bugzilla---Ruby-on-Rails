@@ -1,5 +1,7 @@
-<h1>New Project</h1>
+<div class="container bg-dark text-white rounded">
+  <h1 class="display-4">New Project</h1>
+</div>
+<%= link_to 'Back', manager_projects_path, class: 'btn btn-secondary'%>
+<hr>
 
 <%= render 'form', project: @project, url: manager_projects_path %>
-
-<%= link_to 'Back', manager_projects_path %>

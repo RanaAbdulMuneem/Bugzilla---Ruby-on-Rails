@@ -29,7 +29,7 @@
           <li class="nav-item">
             <%= link_to 'Projects', developer_projects_path, class: 'nav-link' %>
           </li>
-        <% elsif current_user.QualityAssurance %>
+        <% elsif current_user.QualityAssurance? %>
           <li class="nav-item">
             <%= link_to 'Projects', quality_assurance_projects_path, class: 'nav-link' %>
           </li>

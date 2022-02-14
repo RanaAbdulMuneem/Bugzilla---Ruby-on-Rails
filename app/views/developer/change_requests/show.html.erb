@@ -1,4 +1,8 @@
 <%= render 'layouts/change_request', change_request: @change_request %>
+
+
+
+<!--
 <% if @change_request.developers.include? current_user %>
     <% unless @change_request.status == 'resolved' %>
       <%=link_to 'Mark as resolved', developer_change_request_path(@change_request), method: :patch, data: {confirm: 'Are you sure?'} %>
@@ -8,3 +12,4 @@
 <% end %>
 <br>
 <%= link_to 'Back', developer_project_path(@change_request.project_id) %>
+-->

@@ -1,29 +1,72 @@
-<h1><%= Project.find(change_request.project_id).title %> / <%= change_request.title %> ( <%= change_request.status %> )</h1>
+<div class="container bg-dark rounded text-white pb-2 mb-2">
+  <h1 class="display-4"><%= Project.find(change_request.project_id).title %> /
+    <% if change_request.status == 'resolved' || change_request.status == 'completed' %>
+      <span class="text-success">
+      <% else %>
+      <span>
+    <% end %>
+        <%= change_request.title %> ( <%= change_request.status %> )
+      </span>
+  </h1>
+</div>
+<% if current_user.Manager? %>
+  <div class="d-flex">
+    <div class="mr-auto p-2"><%= link_to 'Back', manager_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
+  </div>
+<% elsif current_user.Developer? %>
+  <div class="d-flex">
+    <div class="mr-auto p-2"><%= link_to 'Back', developer_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
 
-<%= image_tag change_request.screen_shot, size: "512x256" if change_request.screen_shot.attached?%><br>
-<strong>Type: </strong><%= change_request.type%><br>
-<strong>Status: </strong><%= change_request.status%><br>
-<strong>Deadline: </strong><%= change_request.deadline%><br>
-<strong>Posted by: </strong><%= QualityAssurance.find(change_request.user_id).email %><br>
-
-<h1>Assigned Developers</h1>
-<% if change_request.developers.count > 0%>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Mail</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% change_request.developers.each do |dev| %>
-        <tr>
-          <td><%= dev.first_name %> <%= dev.last_name %></td>
-          <td><%= dev.email %></td>
-        </tr>
+    <% if @change_request.developers.include? current_user %>
+      <% unless @change_request.status == 'resolved' %>
+        <div class="p-2">
+          <%=link_to 'Mark as resolved', developer_change_request_path(@change_request), method: :patch, data: {confirm: 'Are you sure?'}, class: 'btn btn-success' %>
+        </div>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <h3>No Assigned Developers</h3>
+    <% else %>
+      <div class="p-2">
+        <%= link_to 'Assign', assign_developer_change_request_path(@change_request), method: :post, data: {confirm: 'Are you sure?'}, class: 'btn btn-success' %>
+      </div>
+    <% end %>
+
+  </div>
+<% elsif current_user.QualityAssurance? %>
+  <div class="d-flex">
+    <div class="mr-auto p-2"><%= link_to 'Back', quality_assurance_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
+  </div>
 <% end %>
+<hr>
+<div class="container bg-dark rounded text-white pt-4 pb-2 mb-2">
+  <% if change_request.screen_shot.attached? %>
+    <%= image_tag change_request.screen_shot, class: "img-fluid rounded" %>
+  <% end %>
+  <hr>
+  <p><strong>Type: </strong><%= change_request.type%></p>
+  <p><strong>Status: </strong><%= change_request.status%></p>
+  <p><strong>Deadline: </strong><%= change_request.deadline%></p>
+  <p><strong>Posted by: </strong><%= QualityAssurance.find(change_request.user_id).email %></p>
+</div>
+<hr>
+<div class="container bg-dark rounded text-white pt-4 pb-2 mb-2">
+  <h1>Assigned Developers</h1>
+  <% if change_request.developers.count > 0%>
+    <table class="table table-dark table-striped table-hover" >
+      <thead class="thead-dark" >
+        <tr>
+          <th>Name</th>
+          <th>Mail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% change_request.developers.each do |dev| %>
+          <tr>
+            <td><%= dev.first_name %> <%= dev.last_name %></td>
+            <td><%= dev.email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h3>No Assigned Developers</h3>
+  <% end %>
+</div>

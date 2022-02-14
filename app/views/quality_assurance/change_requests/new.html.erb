@@ -1,52 +1,61 @@
-<h1>New Change Request</h1>
-<%= form_with(model: @change_request, url: quality_assurance_project_change_requests_path(@project), local: true) do |form| %>
-  <% if @change_request.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@change_request.errors.count, "error") %> prohibited this change request from being saved:</h2>
+<div class="container bg-dark text-white rounded pb-1 mb-4">
+  <h1 class="display-4" >New Change Request</h1>
+</div>
 
-      <ul>
-      <% @change_request.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+
+<div class="container bg-dark text-white rounded py-2">
+  <div class="row">
+    <div class="col">
+      <%= form_with(model: @change_request, url: quality_assurance_project_change_requests_path(@project), local: true) do |form| %>
+        <% if @change_request.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@change_request.errors.count, "error") %> prohibited this change request from being saved:</h2>
+
+            <ul>
+            <% @change_request.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field form-group">
+          <%= form.text_field :title, placeholder: 'Descriptive title', class: 'form-control' %>
+        </div>
+        <div class="field form-group">
+          <%= form.label :deadline, class: 'lead' %>
+          <%= form.date_field :deadline, class: 'form-control' %>
+        </div>
+        <div class="field form-group">
+          <%= form.label :screen_shot, class: 'lead' %>
+          <%= form.file_field :screen_shot, class: 'form-control' %>
+        </div>
+
+        <div class="field form-group">
+          <%= form.label :type, class: 'lead' %>
+          <%= form.select :type, options_for_select([['Bug', 'Bug'],['Feature', 'Feature']]), class: 'form-control' %>
+        </div>
+
+        <div class="field" style="display:none;">
+          <%= form.label :status, class: 'lead' %>
+          <%= form.text_field :status, value: 'new'%>
+        </div>
+
+        <div class="field" style="display:none;">
+          <%= form.label :project_id, class: 'lead' %>
+          <%= form.text_field :project_id, value: @project.id%>
+        </div>
+        <div class="field" style="display:none;">
+          <%= form.label :user_id, class: 'lead' %>
+          <%= form.text_field :user_id, value: current_user.id%>
+        </div>
+
+        <%= form.submit class: 'btn btn-success' %>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <div class="col">
+    </div>
   </div>
-  <div class="field">
-    <%= form.label :deadline %>
-    <%= form.date_field :deadline %>
-  </div>
-  <div class="field">
-    <%= form.label :screen_shot %>
-    <%= form.file_field :screen_shot %>
-  </div>
-
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.select :type, options_for_select([['Bug', 'Bug'],['Feature', 'Feature']]) %>
-  </div>
-
-  <div class="field" style="display:none;">
-    <%= form.label :status %>
-    <%= form.text_field :status, value: 'new'%>
-  </div>
-
-  <div class="field" style="display:none;">
-    <%= form.label :project_id %>
-    <%= form.text_field :project_id, value: @project.id%>
-  </div>
-  <div class="field" style="display:none;">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, value: current_user.id%>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
 
 

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class="container bg-dark rounded text-white pb-2 mb-1">
   <h1 class="display-4"><%= @project.title %></h1>
 </div>
@@ -21,6 +19,7 @@
   <% elsif type == 'QualityAssurance' %>
     <div class="d-flex">
       <div class="mr-auto p-2"><%= link_to 'Back', quality_assurance_projects_path, class: 'btn btn-secondary' %></div>
+      <div class="p-2"><%= link_to 'Report new change', new_quality_assurance_project_change_request_path(@project), class: 'btn btn-success' %></div>
     </div>
 
 

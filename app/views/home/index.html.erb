@@ -1,11 +1,38 @@
-<div class="jumbotron jumbotron-fluid bg-dark rounded text-white">
-  <div class="container">
-    <% if user_signed_in?%>
-      <h1 class="display-4">Welcome <%= "#{current_user.first_name} #{current_user.last_name}," %></h1>
-      <p class="lead">Signed in as <%= current_user.type %></p>
-    <% else %>
-      <h1 class="display-4">Welcome to Bugzilla</h1>
-      <p class="lead">The one stop shop for all your bug-tracking needs</p>
-    <% end %>
+<div class="d-flex bg-dark rounded text-white py-2">
+      <div class="mr-auto p-2">
+        <% if user_signed_in?%>
+          <h1 class="display-4">Welcome
+          <%= "#{current_user.first_name} #{current_user.last_name}," %>
+          </h1>
+          <p class="lead">Signed in as <%= current_user.type %></p>
+        <% else %>
+          <h1 class="display-4">Welcome to Bugzilla</h1>
+          <p class="lead">The one stop shop for all your bug-tracking needs</p>
+        <% end %>
+      </div>
+      <div class="p-2">
+        <%= image_tag 'wasp.png', size: '256x256', class: "img-fluid rounded" %>
+      <div>
+</div>
+
+<!--
+<div class="container bg-dark rounded text-white">
+  <div class="row">
+    <div class="col">
+      <% if user_signed_in?%>
+        <h1 class="display-4">Welcome
+        <%= "#{current_user.first_name} #{current_user.last_name}," %>
+        </h1>
+        <p class="lead">Signed in as <%= current_user.type %></p>
+      <% else %>
+        <h1 class="display-4">Welcome to Bugzilla</h1>
+        <p class="lead">The one stop shop for all your bug-tracking needs</p>
+      <% end %>
+    </div>
+    <div class="col text-right">
+      <%= image_tag 'wasp.png', size: '256x256', class: "img-fluid rounded my-5" %>
+    </div>
   </div>
 </div>
+
+-->

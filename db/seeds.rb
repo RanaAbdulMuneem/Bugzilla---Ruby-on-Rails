@@ -23,9 +23,10 @@ qa1 = QualityAssurance.create(email: 'qa1@mail.com', password: '123456', first_n
 qa2 = QualityAssurance.create(email: 'qa2@mail.com', password: '123456', first_name: 'Tim', last_name: 'David')
 puts 'Creating projects'
 projects = []
-3.times do |p|
-  projects[p] = manager.projects.create(title: "Project ##{p}")
-end
+projects[0] = manager.projects.create(title: "Learning System")
+projects[1] = manager.projects.create(title: "Self Driving Car")
+projects[2] = manager.projects.create(title: "Top Secret")
+
 puts 'Assigning users'
 developer1.projects << projects[0]
 developer1.projects << projects[2]

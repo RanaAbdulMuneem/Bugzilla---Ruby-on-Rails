@@ -1,4 +1,8 @@
 class ChangeRequest < ApplicationRecord
+  validates :title, presence: true, uniqueness: true
+  validates :type, presence: true
+  validates :title, presence: true
+
   belongs_to :project
   belongs_to :quality_assurance, class_name: :User, foreign_key: :user_id
 

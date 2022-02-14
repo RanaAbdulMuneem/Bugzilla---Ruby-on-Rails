@@ -4,6 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :type, presence: true
+
   enum type: {
     Manager: 1,
     Developer: 2,

@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 puts 'Running seed file...'
 puts 'Destroying previous'
+ChangeRequest.all.each do |c|
+  c.screen_shot.purge
+end
 ChangeRequest.destroy_all
 WorksOn.destroy_all
 ReportsTo.destroy_all

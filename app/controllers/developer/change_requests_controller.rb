@@ -2,7 +2,9 @@ class Developer::ChangeRequestsController < ApplicationController
   before_action :set_change_request, only: %i[show assign update]
 
   def show
-    #render plain: @change_request.title
+    @project = Project.find_by(id: @change_request.project_id)
+    @qa = QualityAssurance.find_by(id: @change_request.user_id)
+    @developers = @change_request.developers
   end
 
   def assign

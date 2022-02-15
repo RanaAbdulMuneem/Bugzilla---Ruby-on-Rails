@@ -20,7 +20,10 @@
     <%= render 'layouts/navbar' %>
 
     <% if notice %>
-      <%= render 'layouts/alert'%>
+      <%= render 'layouts/alert', message: notice%>
+    <% end %>
+    <% if alert %>
+      <%= render 'layouts/alert', message: alert%>
     <% end %>
 
     <div class="container pt-5">

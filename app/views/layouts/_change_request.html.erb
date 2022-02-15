@@ -1,40 +1,42 @@
 <div class="container bg-dark rounded text-white pb-2 mb-2">
-  <h1 class="display-4"><%= Project.find(change_request.project_id).title %> /
-    <% if change_request.status == 'resolved' || change_request.status == 'completed' %>
-      <span class="text-success">
+  <h1 class="display-4"><%= project.title %>/
+      <% if change_request.status == 'resolved' || change_request.status == 'completed' %>
+      <span class="text-success h1">
       <% else %>
-      <span>
+      <span class="h1">
     <% end %>
-        <%= change_request.title %> ( <%= change_request.status %> )
+      <%= change_request.title %> (<%= change_request.status %>)
       </span>
   </h1>
-</div>
-<% if current_user.Manager? %>
-  <div class="d-flex">
-    <div class="mr-auto p-2"><%= link_to 'Back', manager_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
-  </div>
-<% elsif current_user.Developer? %>
-  <div class="d-flex">
-    <div class="mr-auto p-2"><%= link_to 'Back', developer_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
+  <hr>
+  <% if current_user.Manager? %>
+    <div class="d-flex">
+      <div class="mr-auto p-2"><%= link_to 'Back', manager_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
+    </div>
+  <% elsif current_user.Developer? %>
+    <div class="d-flex">
+      <div class="mr-auto p-2"><%= link_to 'Back', developer_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
 
-    <% if @change_request.developers.include? current_user %>
-      <% unless @change_request.status == 'resolved' %>
+      <% if @change_request.developers.include? current_user %>
+        <% unless @change_request.status == 'resolved' %>
+          <div class="p-2">
+            <%=link_to 'Mark as resolved', developer_change_request_path(@change_request), method: :patch, data: {confirm: 'Are you sure?'}, class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      <% else %>
         <div class="p-2">
-          <%=link_to 'Mark as resolved', developer_change_request_path(@change_request), method: :patch, data: {confirm: 'Are you sure?'}, class: 'btn btn-success' %>
+          <%= link_to 'Assign', assign_developer_change_request_path(@change_request), method: :post, data: {confirm: 'Are you sure?'}, class: 'btn btn-success' %>
         </div>
       <% end %>
-    <% else %>
-      <div class="p-2">
-        <%= link_to 'Assign', assign_developer_change_request_path(@change_request), method: :post, data: {confirm: 'Are you sure?'}, class: 'btn btn-success' %>
-      </div>
-    <% end %>
 
-  </div>
-<% elsif current_user.QualityAssurance? %>
-  <div class="d-flex">
-    <div class="mr-auto p-2"><%= link_to 'Back', quality_assurance_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
-  </div>
-<% end %>
+    </div>
+  <% elsif current_user.QualityAssurance? %>
+    <div class="d-flex">
+      <div class="mr-auto p-2"><%= link_to 'Back', quality_assurance_project_path(change_request.project_id), class: 'btn btn-secondary' %></div>
+    </div>
+  <% end %>
+</div>
+
 <hr>
 <div class="container bg-dark rounded text-white pt-4 pb-2 mb-2">
   <% if change_request.screen_shot.attached? %>
@@ -44,12 +46,12 @@
   <p><strong>Type: </strong><%= change_request.type%></p>
   <p><strong>Status: </strong><%= change_request.status%></p>
   <p><strong>Deadline: </strong><%= change_request.deadline%></p>
-  <p><strong>Posted by: </strong><%= QualityAssurance.find(change_request.user_id).email %></p>
+  <p><strong>Posted by: </strong><%= qa.email %></p>
 </div>
 <hr>
 <div class="container bg-dark rounded text-white pt-4 pb-2 mb-2">
   <h1>Assigned Developers</h1>
-  <% if change_request.developers.count > 0%>
+  <% if developers.count > 0%>
     <table class="table table-dark table-striped table-hover" >
       <thead class="thead-dark" >
         <tr>

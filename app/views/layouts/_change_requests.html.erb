@@ -11,10 +11,6 @@
 
         <% if current_user.Manager? %>
           <th>Developers</th>
-        <% elsif current_user.Developer? %>
-
-        <% elsif current_user.QualityAssurance? %>
-
         <% end %>
 
       </thead>
@@ -43,7 +39,7 @@
             <td><%= change.status%></td>
           <% end %>
 
-          <td><%= QualityAssurance.find(change.user_id).email%></td>
+          <td><%= QualityAssurance.find_by(id: change.user_id).email%></td>
 
           <% if current_user.Manager? %>
             <td class="text-center"><%= change.developers.count %></td>

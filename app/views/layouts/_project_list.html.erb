@@ -1,5 +1,13 @@
 <div class="container bg-dark rounded text-white py-1 mb-2">
   <h1 class="display-4">Projects</h1>
+  <hr>
+  <% if current_user.Manager? %>
+    <div class="d-flex">
+      <div class="mr-auto p-2">
+        <%= link_to 'Create new Project', new_manager_project_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+  <% end %>
 </div>
 <hr>
 <% if @projects.count > 0 %>
@@ -10,13 +18,13 @@
       <% @projects.each do |project| %>
         <tr>
 
-          <% if type == 'Manager' %>
+          <% if current_user.Manager? %>
             <td class="col-10"><%= link_to project.title, manager_project_path(project), class: 'text-white h3'%></td>
-            <td class="pr-0"><%= link_to 'Edit', edit_manager_project_path(project), class: 'btn btn-info' %></td=>
-            <td class="pl-0"><%= link_to 'Destroy', manager_project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td=>
-          <% elsif type == 'Developer' %>
+            <td class="pr-0"><%= link_to 'Edit', edit_manager_project_path(project), class: 'btn btn-info' %></td>
+            <td class="pl-0"><%= link_to 'Destroy', manager_project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+          <% elsif current_user.Developer? %>
             <td class="col-10"><%= link_to project.title, developer_project_path(project), class: 'text-white h3'%></td>
-          <% elsif type == 'QualityAssurance' %>
+          <% elsif current_user.QualityAssurance? %>
             <td class="col-10"><%= link_to project.title, quality_assurance_project_path(project), class: 'text-white h3'%></td>
           <% end %>
 

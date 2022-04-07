@@ -1,24 +1,9 @@
-# README
+Created by: Rana Abdul Muneem
+This is a bug tracking web application built using ruby on rails. Devise gem is used for authentication and service features 3 roles of Manager, Developer, and QA.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Managers can create projects and assign developers and QAs.
+Developers can assign themselves to reported change requests.
+QAs can create change requests for projects they have been added to.
 
-Things you may want to cover:
+![](bugzilla.gif)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
